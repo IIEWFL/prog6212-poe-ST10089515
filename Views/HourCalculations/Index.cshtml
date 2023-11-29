@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebModuleApp.Models.HourCalculation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SelfStudyHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Module.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Semester.SemesterId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SelfStudyHours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Module.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Semester.SemesterId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.HourCalculationId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.HourCalculationId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.HourCalculationId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -18,6 +18,7 @@ namespace WebModuleApp.Models
         public StudyRecord()
         {
             this.FilterUsers = new HashSet<FilterUser>();
+            this.Graphs = new HashSet<Graph>();
         }
     
         public int StudyRecordId { get; set; }
@@ -27,5 +28,7 @@ namespace WebModuleApp.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FilterUser> FilterUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Graph> Graphs { get; set; }
     }
 }

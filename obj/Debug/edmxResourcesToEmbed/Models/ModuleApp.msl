@@ -71,5 +71,28 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Graphs">
+      <EntityTypeMapping TypeName="ModuleAppDEMO2Model.Graph">
+        <MappingFragment StoreEntitySet="Graph">
+          <ScalarProperty Name="IdealHoursPerWeek" ColumnName="IdealHoursPerWeek" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="HoursPerWeek" ColumnName="HoursPerWeek" />
+          <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
+          <ScalarProperty Name="StudyRecordId" ColumnName="StudyRecordId" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="GraphId" ColumnName="GraphId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HourCalculations">
+      <EntityTypeMapping TypeName="ModuleAppDEMO2Model.HourCalculation">
+        <MappingFragment StoreEntitySet="HourCalculation">
+          <ScalarProperty Name="SelfStudyHours" ColumnName="SelfStudyHours" />
+          <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="HourCalculationId" ColumnName="HourCalculationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

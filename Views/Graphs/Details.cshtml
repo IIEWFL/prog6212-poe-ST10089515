@@ -1,0 +1,66 @@
+﻿@model WebModuleApp.Models.Graph
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Graph</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HoursPerWeek)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoursPerWeek)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdealHoursPerWeek)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdealHoursPerWeek)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Module.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Module.Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Semester.SemesterId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Semester.SemesterId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudyRecord.StudyRecordId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudyRecord.StudyRecordId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GraphId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

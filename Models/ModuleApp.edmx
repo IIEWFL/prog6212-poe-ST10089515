@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ModuleAppDEMO2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ModuleAppDEMO2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="FilterUser">
           <Key>
             <PropertyRef Name="FilterUserId" />
@@ -14,6 +14,27 @@
           <Property Name="StudyRecordId" Type="int" />
           <Property Name="ModuleId" Type="int" />
           <Property Name="SemesterId" Type="int" />
+        </EntityType>
+        <EntityType Name="Graph">
+          <Key>
+            <PropertyRef Name="GraphId" />
+          </Key>
+          <Property Name="GraphId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleId" Type="int" />
+          <Property Name="StudyRecordId" Type="int" />
+          <Property Name="SemesterId" Type="int" />
+          <Property Name="HoursPerWeek" Type="float" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="IdealHoursPerWeek" Type="float" />
+        </EntityType>
+        <EntityType Name="HourCalculation">
+          <Key>
+            <PropertyRef Name="HourCalculationId" />
+          </Key>
+          <Property Name="HourCalculationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleId" Type="int" />
+          <Property Name="SemesterId" Type="int" />
+          <Property Name="SelfStudyHours" Type="float" />
         </EntityType>
         <EntityType Name="Modules">
           <Key>
@@ -116,6 +137,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Graph__ModuleId__628FA481">
+          <End Role="Modules" Type="Self.Modules" Multiplicity="0..1" />
+          <End Role="Graph" Type="Self.Graph" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="Graph">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Graph__SemesterI__6477ECF3">
+          <End Role="Semesters" Type="Self.Semesters" Multiplicity="0..1" />
+          <End Role="Graph" Type="Self.Graph" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semesters">
+              <PropertyRef Name="SemesterId" />
+            </Principal>
+            <Dependent Role="Graph">
+              <PropertyRef Name="SemesterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Graph__StudyReco__6383C8BA">
+          <End Role="StudyRecords" Type="Self.StudyRecords" Multiplicity="0..1" />
+          <End Role="Graph" Type="Self.Graph" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudyRecords">
+              <PropertyRef Name="StudyRecordId" />
+            </Principal>
+            <Dependent Role="Graph">
+              <PropertyRef Name="StudyRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HourCalcu__Modul__6754599E">
+          <End Role="Modules" Type="Self.Modules" Multiplicity="0..1" />
+          <End Role="HourCalculation" Type="Self.HourCalculation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="HourCalculation">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HourCalcu__Semes__68487DD7">
+          <End Role="Semesters" Type="Self.Semesters" Multiplicity="0..1" />
+          <End Role="HourCalculation" Type="Self.HourCalculation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semesters">
+              <PropertyRef Name="SemesterId" />
+            </Principal>
+            <Dependent Role="HourCalculation">
+              <PropertyRef Name="SemesterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__SemesterM__Modul__3F466844">
           <End Role="Modules" Type="Self.Modules" Multiplicity="1" />
           <End Role="SemesterModule" Type="Self.SemesterModule" Multiplicity="*" />
@@ -154,6 +235,8 @@
         </Association>
         <EntityContainer Name="ModuleAppDEMO2ModelStoreContainer">
           <EntitySet Name="FilterUser" EntityType="Self.FilterUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Graph" EntityType="Self.Graph" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HourCalculation" EntityType="Self.HourCalculation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SemesterModule" EntityType="Self.SemesterModule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Semesters" EntityType="Self.Semesters" Schema="dbo" store:Type="Tables" />
@@ -176,6 +259,26 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="FilterUser" EntitySet="FilterUser" />
           </AssociationSet>
+          <AssociationSet Name="FK__Graph__ModuleId__628FA481" Association="Self.FK__Graph__ModuleId__628FA481">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="Graph" EntitySet="Graph" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Graph__SemesterI__6477ECF3" Association="Self.FK__Graph__SemesterI__6477ECF3">
+            <End Role="Semesters" EntitySet="Semesters" />
+            <End Role="Graph" EntitySet="Graph" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Graph__StudyReco__6383C8BA" Association="Self.FK__Graph__StudyReco__6383C8BA">
+            <End Role="StudyRecords" EntitySet="StudyRecords" />
+            <End Role="Graph" EntitySet="Graph" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HourCalcu__Modul__6754599E" Association="Self.FK__HourCalcu__Modul__6754599E">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="HourCalculation" EntitySet="HourCalculation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HourCalcu__Semes__68487DD7" Association="Self.FK__HourCalcu__Semes__68487DD7">
+            <End Role="Semesters" EntitySet="Semesters" />
+            <End Role="HourCalculation" EntitySet="HourCalculation" />
+          </AssociationSet>
           <AssociationSet Name="FK__SemesterM__Modul__3F466844" Association="Self.FK__SemesterM__Modul__3F466844">
             <End Role="Modules" EntitySet="Modules" />
             <End Role="SemesterModule" EntitySet="SemesterModule" />
@@ -189,8 +292,7 @@
             <End Role="UserLogin" EntitySet="UserLogin" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ModuleAppDEMO2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -219,6 +321,8 @@
           <Property Name="ClassHoursPerWeek" Type="Int32" />
           <NavigationProperty Name="FilterUsers" Relationship="Self.FK__FilterUse__Modul__4CA06362" FromRole="Modules" ToRole="FilterUser" />
           <NavigationProperty Name="SemesterModules" Relationship="Self.FK__SemesterM__Modul__3F466844" FromRole="Modules" ToRole="SemesterModule" />
+          <NavigationProperty Name="Graphs" Relationship="ModuleAppDEMO2Model.FK__Graph__ModuleId__628FA481" FromRole="Module" ToRole="Graph" />
+          <NavigationProperty Name="HourCalculations" Relationship="ModuleAppDEMO2Model.FK__HourCalcu__Modul__6754599E" FromRole="Module" ToRole="HourCalculation" />
         </EntityType>
         <EntityType Name="SemesterModule">
           <Key>
@@ -240,6 +344,8 @@
           <Property Name="NumberofWeeks" Type="Int32" />
           <NavigationProperty Name="FilterUsers" Relationship="Self.FK__FilterUse__Semes__4D94879B" FromRole="Semesters" ToRole="FilterUser" />
           <NavigationProperty Name="SemesterModules" Relationship="Self.FK__SemesterM__Semes__403A8C7D" FromRole="Semesters" ToRole="SemesterModule" />
+          <NavigationProperty Name="Graphs" Relationship="ModuleAppDEMO2Model.FK__Graph__SemesterI__6477ECF3" FromRole="Semester" ToRole="Graph" />
+          <NavigationProperty Name="HourCalculations" Relationship="ModuleAppDEMO2Model.FK__HourCalcu__Semes__68487DD7" FromRole="Semester" ToRole="HourCalculation" />
         </EntityType>
         <EntityType Name="StudyRecord">
           <Key>
@@ -250,6 +356,7 @@
           <Property Name="Hours" Type="Double" />
           <Property Name="Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="FilterUsers" Relationship="Self.FK__FilterUse__Study__4BAC3F29" FromRole="StudyRecords" ToRole="FilterUser" />
+          <NavigationProperty Name="Graphs" Relationship="ModuleAppDEMO2Model.FK__Graph__StudyReco__6383C8BA" FromRole="StudyRecord" ToRole="Graph" />
         </EntityType>
         <EntityType Name="UserLogin">
           <Key>
@@ -391,7 +498,115 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="UserLogin" EntitySet="UserLogins" />
           </AssociationSet>
+          <EntitySet Name="Graphs" EntityType="ModuleAppDEMO2Model.Graph" />
+          <EntitySet Name="HourCalculations" EntityType="ModuleAppDEMO2Model.HourCalculation" />
+          <AssociationSet Name="FK__Graph__ModuleId__628FA481" Association="ModuleAppDEMO2Model.FK__Graph__ModuleId__628FA481">
+            <End Role="Module" EntitySet="Modules" />
+            <End Role="Graph" EntitySet="Graphs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Graph__SemesterI__6477ECF3" Association="ModuleAppDEMO2Model.FK__Graph__SemesterI__6477ECF3">
+            <End Role="Semester" EntitySet="Semesters" />
+            <End Role="Graph" EntitySet="Graphs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Graph__StudyReco__6383C8BA" Association="ModuleAppDEMO2Model.FK__Graph__StudyReco__6383C8BA">
+            <End Role="StudyRecord" EntitySet="StudyRecords" />
+            <End Role="Graph" EntitySet="Graphs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HourCalcu__Modul__6754599E" Association="ModuleAppDEMO2Model.FK__HourCalcu__Modul__6754599E">
+            <End Role="Module" EntitySet="Modules" />
+            <End Role="HourCalculation" EntitySet="HourCalculations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HourCalcu__Semes__68487DD7" Association="ModuleAppDEMO2Model.FK__HourCalcu__Semes__68487DD7">
+            <End Role="Semester" EntitySet="Semesters" />
+            <End Role="HourCalculation" EntitySet="HourCalculations" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Graph">
+          <Key>
+            <PropertyRef Name="GraphId" />
+          </Key>
+          <Property Name="GraphId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleId" Type="Int32" />
+          <Property Name="StudyRecordId" Type="Int32" />
+          <Property Name="SemesterId" Type="Int32" />
+          <Property Name="HoursPerWeek" Type="Double" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="IdealHoursPerWeek" Type="Double" />
+          <NavigationProperty Name="Module" Relationship="ModuleAppDEMO2Model.FK__Graph__ModuleId__628FA481" FromRole="Graph" ToRole="Module" />
+          <NavigationProperty Name="Semester" Relationship="ModuleAppDEMO2Model.FK__Graph__SemesterI__6477ECF3" FromRole="Graph" ToRole="Semester" />
+          <NavigationProperty Name="StudyRecord" Relationship="ModuleAppDEMO2Model.FK__Graph__StudyReco__6383C8BA" FromRole="Graph" ToRole="StudyRecord" />
+        </EntityType>
+        <EntityType Name="HourCalculation">
+          <Key>
+            <PropertyRef Name="HourCalculationId" />
+          </Key>
+          <Property Name="HourCalculationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleId" Type="Int32" />
+          <Property Name="SemesterId" Type="Int32" />
+          <Property Name="SelfStudyHours" Type="Double" />
+          <NavigationProperty Name="Module" Relationship="ModuleAppDEMO2Model.FK__HourCalcu__Modul__6754599E" FromRole="HourCalculation" ToRole="Module" />
+          <NavigationProperty Name="Semester" Relationship="ModuleAppDEMO2Model.FK__HourCalcu__Semes__68487DD7" FromRole="HourCalculation" ToRole="Semester" />
+        </EntityType>
+        <Association Name="FK__Graph__ModuleId__628FA481">
+          <End Type="ModuleAppDEMO2Model.Module" Role="Module" Multiplicity="0..1" />
+          <End Type="ModuleAppDEMO2Model.Graph" Role="Graph" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="Graph">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Graph__SemesterI__6477ECF3">
+          <End Type="ModuleAppDEMO2Model.Semester" Role="Semester" Multiplicity="0..1" />
+          <End Type="ModuleAppDEMO2Model.Graph" Role="Graph" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semester">
+              <PropertyRef Name="SemesterId" />
+            </Principal>
+            <Dependent Role="Graph">
+              <PropertyRef Name="SemesterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Graph__StudyReco__6383C8BA">
+          <End Type="ModuleAppDEMO2Model.StudyRecord" Role="StudyRecord" Multiplicity="0..1" />
+          <End Type="ModuleAppDEMO2Model.Graph" Role="Graph" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudyRecord">
+              <PropertyRef Name="StudyRecordId" />
+            </Principal>
+            <Dependent Role="Graph">
+              <PropertyRef Name="StudyRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HourCalcu__Modul__6754599E">
+          <End Type="ModuleAppDEMO2Model.Module" Role="Module" Multiplicity="0..1" />
+          <End Type="ModuleAppDEMO2Model.HourCalculation" Role="HourCalculation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="HourCalculation">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HourCalcu__Semes__68487DD7">
+          <End Type="ModuleAppDEMO2Model.Semester" Role="Semester" Multiplicity="0..1" />
+          <End Type="ModuleAppDEMO2Model.HourCalculation" Role="HourCalculation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semester">
+              <PropertyRef Name="SemesterId" />
+            </Principal>
+            <Dependent Role="HourCalculation">
+              <PropertyRef Name="SemesterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -465,6 +680,29 @@
                 <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Graphs">
+            <EntityTypeMapping TypeName="ModuleAppDEMO2Model.Graph">
+              <MappingFragment StoreEntitySet="Graph">
+                <ScalarProperty Name="IdealHoursPerWeek" ColumnName="IdealHoursPerWeek" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="HoursPerWeek" ColumnName="HoursPerWeek" />
+                <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
+                <ScalarProperty Name="StudyRecordId" ColumnName="StudyRecordId" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="GraphId" ColumnName="GraphId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HourCalculations">
+            <EntityTypeMapping TypeName="ModuleAppDEMO2Model.HourCalculation">
+              <MappingFragment StoreEntitySet="HourCalculation">
+                <ScalarProperty Name="SelfStudyHours" ColumnName="SelfStudyHours" />
+                <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="HourCalculationId" ColumnName="HourCalculationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

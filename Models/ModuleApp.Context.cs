@@ -32,5 +32,7 @@ namespace WebModuleApp.Models
         public virtual DbSet<StudyRecord> StudyRecords { get; set; }
         public virtual DbSet<UserLogin> UserLogins { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Graph> Graphs { get; set; }
+        public virtual DbSet<HourCalculation> HourCalculations { get; set; }
     }
 }

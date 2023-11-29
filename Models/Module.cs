@@ -19,6 +19,8 @@ namespace WebModuleApp.Models
         {
             this.FilterUsers = new HashSet<FilterUser>();
             this.SemesterModules = new HashSet<SemesterModule>();
+            this.Graphs = new HashSet<Graph>();
+            this.HourCalculations = new HashSet<HourCalculation>();
         }
     
         public int ModuleId { get; set; }
@@ -31,5 +33,9 @@ namespace WebModuleApp.Models
         public virtual ICollection<FilterUser> FilterUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemesterModule> SemesterModules { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Graph> Graphs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HourCalculation> HourCalculations { get; set; }
     }
 }

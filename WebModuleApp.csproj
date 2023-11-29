@@ -129,7 +129,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GraphsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HourCalculationsController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="Controllers\SemesterModulesController.cs" />
     <Compile Include="Controllers\SemestersController.cs" />
@@ -146,6 +148,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HomePage.aspx.cs">
+      <DependentUpon>HomePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HomePage.aspx.designer.cs">
+      <DependentUpon>HomePage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -154,6 +163,12 @@
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\FilterUser.cs">
+      <DependentUpon>ModuleApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Graph.cs">
+      <DependentUpon>ModuleApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HourCalculation.cs">
       <DependentUpon>ModuleApp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Module.cs">
@@ -255,6 +270,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="HomePage.aspx" />
     <Content Include="login.aspx" />
     <Content Include="Models\ModuleApp.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -340,6 +356,16 @@
     <Content Include="Views\UserLogins\Edit.cshtml" />
     <Content Include="Views\UserLogins\Index.cshtml" />
     <Content Include="Site1.Master" />
+    <Content Include="Views\Graphs\Create.cshtml" />
+    <Content Include="Views\Graphs\Delete.cshtml" />
+    <Content Include="Views\Graphs\Details.cshtml" />
+    <Content Include="Views\Graphs\Edit.cshtml" />
+    <Content Include="Views\Graphs\Index.cshtml" />
+    <Content Include="Views\HourCalculations\Create.cshtml" />
+    <Content Include="Views\HourCalculations\Delete.cshtml" />
+    <Content Include="Views\HourCalculations\Details.cshtml" />
+    <Content Include="Views\HourCalculations\Edit.cshtml" />
+    <Content Include="Views\HourCalculations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

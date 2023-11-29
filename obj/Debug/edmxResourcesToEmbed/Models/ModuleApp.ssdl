@@ -10,6 +10,27 @@
     <Property Name="ModuleId" Type="int" />
     <Property Name="SemesterId" Type="int" />
   </EntityType>
+  <EntityType Name="Graph">
+    <Key>
+      <PropertyRef Name="GraphId" />
+    </Key>
+    <Property Name="GraphId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ModuleId" Type="int" />
+    <Property Name="StudyRecordId" Type="int" />
+    <Property Name="SemesterId" Type="int" />
+    <Property Name="HoursPerWeek" Type="float" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="IdealHoursPerWeek" Type="float" />
+  </EntityType>
+  <EntityType Name="HourCalculation">
+    <Key>
+      <PropertyRef Name="HourCalculationId" />
+    </Key>
+    <Property Name="HourCalculationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ModuleId" Type="int" />
+    <Property Name="SemesterId" Type="int" />
+    <Property Name="SelfStudyHours" Type="float" />
+  </EntityType>
   <EntityType Name="Modules">
     <Key>
       <PropertyRef Name="ModuleId" />
@@ -111,6 +132,66 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Graph__ModuleId__628FA481">
+    <End Role="Modules" Type="Self.Modules" Multiplicity="0..1" />
+    <End Role="Graph" Type="Self.Graph" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modules">
+        <PropertyRef Name="ModuleId" />
+      </Principal>
+      <Dependent Role="Graph">
+        <PropertyRef Name="ModuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Graph__SemesterI__6477ECF3">
+    <End Role="Semesters" Type="Self.Semesters" Multiplicity="0..1" />
+    <End Role="Graph" Type="Self.Graph" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semesters">
+        <PropertyRef Name="SemesterId" />
+      </Principal>
+      <Dependent Role="Graph">
+        <PropertyRef Name="SemesterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Graph__StudyReco__6383C8BA">
+    <End Role="StudyRecords" Type="Self.StudyRecords" Multiplicity="0..1" />
+    <End Role="Graph" Type="Self.Graph" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudyRecords">
+        <PropertyRef Name="StudyRecordId" />
+      </Principal>
+      <Dependent Role="Graph">
+        <PropertyRef Name="StudyRecordId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HourCalcu__Modul__6754599E">
+    <End Role="Modules" Type="Self.Modules" Multiplicity="0..1" />
+    <End Role="HourCalculation" Type="Self.HourCalculation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modules">
+        <PropertyRef Name="ModuleId" />
+      </Principal>
+      <Dependent Role="HourCalculation">
+        <PropertyRef Name="ModuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HourCalcu__Semes__68487DD7">
+    <End Role="Semesters" Type="Self.Semesters" Multiplicity="0..1" />
+    <End Role="HourCalculation" Type="Self.HourCalculation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semesters">
+        <PropertyRef Name="SemesterId" />
+      </Principal>
+      <Dependent Role="HourCalculation">
+        <PropertyRef Name="SemesterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__SemesterM__Modul__3F466844">
     <End Role="Modules" Type="Self.Modules" Multiplicity="1" />
     <End Role="SemesterModule" Type="Self.SemesterModule" Multiplicity="*" />
@@ -149,6 +230,8 @@
   </Association>
   <EntityContainer Name="ModuleAppDEMO2ModelStoreContainer">
     <EntitySet Name="FilterUser" EntityType="Self.FilterUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Graph" EntityType="Self.Graph" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HourCalculation" EntityType="Self.HourCalculation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SemesterModule" EntityType="Self.SemesterModule" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Semesters" EntityType="Self.Semesters" Schema="dbo" store:Type="Tables" />
@@ -170,6 +253,26 @@
     <AssociationSet Name="FK__FilterUse__UserI__4AB81AF0" Association="Self.FK__FilterUse__UserI__4AB81AF0">
       <End Role="Users" EntitySet="Users" />
       <End Role="FilterUser" EntitySet="FilterUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Graph__ModuleId__628FA481" Association="Self.FK__Graph__ModuleId__628FA481">
+      <End Role="Modules" EntitySet="Modules" />
+      <End Role="Graph" EntitySet="Graph" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Graph__SemesterI__6477ECF3" Association="Self.FK__Graph__SemesterI__6477ECF3">
+      <End Role="Semesters" EntitySet="Semesters" />
+      <End Role="Graph" EntitySet="Graph" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Graph__StudyReco__6383C8BA" Association="Self.FK__Graph__StudyReco__6383C8BA">
+      <End Role="StudyRecords" EntitySet="StudyRecords" />
+      <End Role="Graph" EntitySet="Graph" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HourCalcu__Modul__6754599E" Association="Self.FK__HourCalcu__Modul__6754599E">
+      <End Role="Modules" EntitySet="Modules" />
+      <End Role="HourCalculation" EntitySet="HourCalculation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HourCalcu__Semes__68487DD7" Association="Self.FK__HourCalcu__Semes__68487DD7">
+      <End Role="Semesters" EntitySet="Semesters" />
+      <End Role="HourCalculation" EntitySet="HourCalculation" />
     </AssociationSet>
     <AssociationSet Name="FK__SemesterM__Modul__3F466844" Association="Self.FK__SemesterM__Modul__3F466844">
       <End Role="Modules" EntitySet="Modules" />

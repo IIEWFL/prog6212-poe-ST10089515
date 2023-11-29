@@ -19,6 +19,13 @@
         <AssociationConnector Association="ModuleAppDEMO2Model.FK__SemesterM__Modul__3F466844" ManuallyRouted="false" />
         <AssociationConnector Association="ModuleAppDEMO2Model.FK__SemesterM__Semes__403A8C7D" ManuallyRouted="false" />
         <AssociationConnector Association="ModuleAppDEMO2Model.FK__UserLogin__UserI__46E78A0C" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ModuleAppDEMO2Model.Graph" Width="1.5" PointX="6" PointY="5.75" />
+        <EntityTypeShape EntityType="ModuleAppDEMO2Model.HourCalculation" Width="1.5" PointX="3" PointY="6.875" />
+        <AssociationConnector Association="ModuleAppDEMO2Model.FK__Graph__ModuleId__628FA481" />
+        <AssociationConnector Association="ModuleAppDEMO2Model.FK__Graph__SemesterI__6477ECF3" />
+        <AssociationConnector Association="ModuleAppDEMO2Model.FK__Graph__StudyReco__6383C8BA" />
+        <AssociationConnector Association="ModuleAppDEMO2Model.FK__HourCalcu__Modul__6754599E" />
+        <AssociationConnector Association="ModuleAppDEMO2Model.FK__HourCalcu__Semes__68487DD7" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
