@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ModuleAppDEMO2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="FilterUser">
+    <Key>
+      <PropertyRef Name="FilterUserId" />
+    </Key>
+    <Property Name="FilterUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="StudyRecordId" Type="Int32" />
+    <Property Name="ModuleId" Type="Int32" />
+    <Property Name="SemesterId" Type="Int32" />
+    <NavigationProperty Name="Module" Relationship="Self.FK__FilterUse__Modul__4CA06362" FromRole="FilterUser" ToRole="Modules" />
+    <NavigationProperty Name="Semester" Relationship="Self.FK__FilterUse__Semes__4D94879B" FromRole="FilterUser" ToRole="Semesters" />
+    <NavigationProperty Name="StudyRecord" Relationship="Self.FK__FilterUse__Study__4BAC3F29" FromRole="FilterUser" ToRole="StudyRecords" />
+    <NavigationProperty Name="User" Relationship="Self.FK__FilterUse__UserI__4AB81AF0" FromRole="FilterUser" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Module">
+    <Key>
+      <PropertyRef Name="ModuleId" />
+    </Key>
+    <Property Name="ModuleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Credits" Type="Int32" />
+    <Property Name="ClassHoursPerWeek" Type="Int32" />
+    <NavigationProperty Name="FilterUsers" Relationship="Self.FK__FilterUse__Modul__4CA06362" FromRole="Modules" ToRole="FilterUser" />
+    <NavigationProperty Name="SemesterModules" Relationship="Self.FK__SemesterM__Modul__3F466844" FromRole="Modules" ToRole="SemesterModule" />
+  </EntityType>
+  <EntityType Name="SemesterModule">
+    <Key>
+      <PropertyRef Name="SemesterModuleId" />
+    </Key>
+    <Property Name="SemesterModuleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ModuleId" Type="Int32" Nullable="false" />
+    <Property Name="SemesterId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Module" Relationship="Self.FK__SemesterM__Modul__3F466844" FromRole="SemesterModule" ToRole="Modules" />
+    <NavigationProperty Name="Semester" Relationship="Self.FK__SemesterM__Semes__403A8C7D" FromRole="SemesterModule" ToRole="Semesters" />
+  </EntityType>
+  <EntityType Name="Semester">
+    <Key>
+      <PropertyRef Name="SemesterId" />
+    </Key>
+    <Property Name="SemesterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NumberofModules" Type="Int32" />
+    <Property Name="Time" Type="DateTime" Precision="3" />
+    <Property Name="NumberofWeeks" Type="Int32" />
+    <NavigationProperty Name="FilterUsers" Relationship="Self.FK__FilterUse__Semes__4D94879B" FromRole="Semesters" ToRole="FilterUser" />
+    <NavigationProperty Name="SemesterModules" Relationship="Self.FK__SemesterM__Semes__403A8C7D" FromRole="Semesters" ToRole="SemesterModule" />
+  </EntityType>
+  <EntityType Name="StudyRecord">
+    <Key>
+      <PropertyRef Name="StudyRecordId" />
+    </Key>
+    <Property Name="StudyRecordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ModuleId" Type="Int32" />
+    <Property Name="Hours" Type="Double" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="FilterUsers" Relationship="Self.FK__FilterUse__Study__4BAC3F29" FromRole="StudyRecords" ToRole="FilterUser" />
+  </EntityType>
+  <EntityType Name="UserLogin">
+    <Key>
+      <PropertyRef Name="LoginId" />
+    </Key>
+    <Property Name="LoginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="Self.FK__UserLogin__UserI__46E78A0C" FromRole="UserLogin" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PasswordHash" Type="Binary" MaxLength="64" FixedLength="false" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="FilterUsers" Relationship="Self.FK__FilterUse__UserI__4AB81AF0" FromRole="Users" ToRole="FilterUser" />
+    <NavigationProperty Name="UserLogins" Relationship="Self.FK__UserLogin__UserI__46E78A0C" FromRole="Users" ToRole="UserLogin" />
+  </EntityType>
+  <Association Name="FK__FilterUse__Modul__4CA06362">
+    <End Role="Modules" Type="Self.Module" Multiplicity="0..1" />
+    <End Role="FilterUser" Type="Self.FilterUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modules">
+        <PropertyRef Name="ModuleId" />
+      </Principal>
+      <Dependent Role="FilterUser">
+        <PropertyRef Name="ModuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FilterUse__Semes__4D94879B">
+    <End Role="Semesters" Type="Self.Semester" Multiplicity="0..1" />
+    <End Role="FilterUser" Type="Self.FilterUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semesters">
+        <PropertyRef Name="SemesterId" />
+      </Principal>
+      <Dependent Role="FilterUser">
+        <PropertyRef Name="SemesterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FilterUse__Study__4BAC3F29">
+    <End Role="StudyRecords" Type="Self.StudyRecord" Multiplicity="0..1" />
+    <End Role="FilterUser" Type="Self.FilterUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudyRecords">
+        <PropertyRef Name="StudyRecordId" />
+      </Principal>
+      <Dependent Role="FilterUser">
+        <PropertyRef Name="StudyRecordId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FilterUse__UserI__4AB81AF0">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="FilterUser" Type="Self.FilterUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="FilterUser">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SemesterM__Modul__3F466844">
+    <End Role="Modules" Type="Self.Module" Multiplicity="1" />
+    <End Role="SemesterModule" Type="Self.SemesterModule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modules">
+        <PropertyRef Name="ModuleId" />
+      </Principal>
+      <Dependent Role="SemesterModule">
+        <PropertyRef Name="ModuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SemesterM__Semes__403A8C7D">
+    <End Role="Semesters" Type="Self.Semester" Multiplicity="1" />
+    <End Role="SemesterModule" Type="Self.SemesterModule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semesters">
+        <PropertyRef Name="SemesterId" />
+      </Principal>
+      <Dependent Role="SemesterModule">
+        <PropertyRef Name="SemesterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserLogin__UserI__46E78A0C">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModuleAppDEMO2Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="FilterUsers" EntityType="Self.FilterUser" />
+    <EntitySet Name="Modules" EntityType="Self.Module" />
+    <EntitySet Name="SemesterModules" EntityType="Self.SemesterModule" />
+    <EntitySet Name="Semesters" EntityType="Self.Semester" />
+    <EntitySet Name="StudyRecords" EntityType="Self.StudyRecord" />
+    <EntitySet Name="UserLogins" EntityType="Self.UserLogin" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK__FilterUse__Modul__4CA06362" Association="Self.FK__FilterUse__Modul__4CA06362">
+      <End Role="Modules" EntitySet="Modules" />
+      <End Role="FilterUser" EntitySet="FilterUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FilterUse__Semes__4D94879B" Association="Self.FK__FilterUse__Semes__4D94879B">
+      <End Role="Semesters" EntitySet="Semesters" />
+      <End Role="FilterUser" EntitySet="FilterUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FilterUse__Study__4BAC3F29" Association="Self.FK__FilterUse__Study__4BAC3F29">
+      <End Role="StudyRecords" EntitySet="StudyRecords" />
+      <End Role="FilterUser" EntitySet="FilterUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FilterUse__UserI__4AB81AF0" Association="Self.FK__FilterUse__UserI__4AB81AF0">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="FilterUser" EntitySet="FilterUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SemesterM__Modul__3F466844" Association="Self.FK__SemesterM__Modul__3F466844">
+      <End Role="Modules" EntitySet="Modules" />
+      <End Role="SemesterModule" EntitySet="SemesterModules" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SemesterM__Semes__403A8C7D" Association="Self.FK__SemesterM__Semes__403A8C7D">
+      <End Role="Semesters" EntitySet="Semesters" />
+      <End Role="SemesterModule" EntitySet="SemesterModules" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserLogin__UserI__46E78A0C" Association="Self.FK__UserLogin__UserI__46E78A0C">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserLogin" EntitySet="UserLogins" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

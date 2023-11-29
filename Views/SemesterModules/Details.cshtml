@@ -1,0 +1,34 @@
+﻿@model WebModuleApp.Models.SemesterModule
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SemesterModule</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Module.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Module.Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Semester.SemesterId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Semester.SemesterId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SemesterModuleId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b01ca332dd744f4793e6fc0901a07cea" Name="Diagram1">
+        <EntityTypeShape EntityType="ModuleAppDEMO2Model.FilterUser" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModuleAppDEMO2Model.Module" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModuleAppDEMO2Model.SemesterModule" Width="1.5" PointX="6" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModuleAppDEMO2Model.Semester" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModuleAppDEMO2Model.StudyRecord" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModuleAppDEMO2Model.UserLogin" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModuleAppDEMO2Model.User" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
+        <AssociationConnector Association="ModuleAppDEMO2Model.FK__FilterUse__Modul__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="ModuleAppDEMO2Model.FK__FilterUse__Semes__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="ModuleAppDEMO2Model.FK__FilterUse__Study__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="ModuleAppDEMO2Model.FK__FilterUse__UserI__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="ModuleAppDEMO2Model.FK__SemesterM__Modul__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="ModuleAppDEMO2Model.FK__SemesterM__Semes__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="ModuleAppDEMO2Model.FK__UserLogin__UserI__46E78A0C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,42 @@
+﻿@model WebModuleApp.Models.Semester
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Semester</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberofModules)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberofModules)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberofWeeks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberofWeeks)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SemesterId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
