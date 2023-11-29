@@ -366,6 +366,7 @@
     <Content Include="Views\HourCalculations\Details.cshtml" />
     <Content Include="Views\HourCalculations\Edit.cshtml" />
     <Content Include="Views\HourCalculations\Index.cshtml" />
+    <Content Include="Views\Graphs\ShowGraph.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

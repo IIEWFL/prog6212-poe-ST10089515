@@ -22,6 +22,27 @@ namespace WebModuleApp.Controllers
         }
 
         // GET: Graphs/Details/5
+
+
+        public ActionResult ShowGraph()
+        {
+            // Retrieve data for the graph, e.g., hours spent on a module per week
+            // This will depend on your specific data model and requirements
+            // For now, let's assume you have a method to get the data
+            var graphData = GetGraphData();
+
+            return View(graphData);
+        }
+
+        private List<Graph> GetGraphData()
+        {
+            // Implement the logic to retrieve and format the data for the graph
+            // This will depend on your specific data model and requirements
+            // For example, you might query the database and format the data accordingly
+            // Return a list of view models with the necessary data for the graph
+            return new List<Graph>();
+        }
+
         public ActionResult Details(int? id)
         {
             if (id == null)
