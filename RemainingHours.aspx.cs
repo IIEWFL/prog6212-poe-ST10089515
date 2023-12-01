@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -15,6 +16,7 @@ namespace WebModuleApp
     {
 
         SqlConnection con = new SqlConnection(@"Data Source=NAITH;Initial Catalog=ModuleAppDEMO2;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
+        public Module Module { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -74,6 +76,8 @@ namespace WebModuleApp
 
         protected void btnDisplay_Click(object sender, EventArgs e)
         {
+
+            Module = new Module();
             string searchCode = txtCode.Text;
             int hours = int.Parse(txtHours.Text);
 
@@ -92,8 +96,9 @@ namespace WebModuleApp
                         ModuleCredits = module.Credits.GetValueOrDefault(),
                         ModuleClassHours = module.ClassHoursPerWeek.GetValueOrDefault(),
                         Weeks = 0, // You may need to set the value for Weeks based on your logic
-                        SelfStudyHoursPerWeek = 0.0 // You may need to set the initial value based on your logic
+                        SelfStudyHoursPerWeek = ((module.Credits.GetValueOrDefault() * 10) / module.ClassHoursPerWeek.GetValueOrDefault()) - module.ClassHoursPerWeek.GetValueOrDefault()
                     };
+
 
                     // Calculate the remaining hours
                     double remainingHours = selfStudyHours.SelfStudyHoursPerWeek - double.Parse(txtHours.Text);
