@@ -4,24 +4,37 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Record Study Hours</title>
     <style>
         body {
-            background-color: grey;
+            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
         .label-style {
             font-weight: bold;
-            color: black;
+            color: #333333;
+            display: block;
+            margin-bottom: 10px;
         }
 
         .textbox-style {
-            padding: 5px;
-            margin: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            width: 100%;
         }
 
         .button-style {
-            background-color: blue;
+            background-color: #3498db;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -31,36 +44,41 @@
             font-size: 16px;
             margin: 4px 2px;
             cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-style:hover {
+            background-color: #2980b9;
         }
 
         .message-style {
-            color: red;
+            color: #e74c3c;
+            margin-top: 10px;
         }
 
         .display-style {
-            color: black;
+            color: #333333;
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <asp:Label ID="Label1" CssClass="label-style" runat="server" Text="RECORD STUDY HOURS"></asp:Label>
-        </div>
+        <h2 class="label-style">RECORD STUDY HOURS</h2>
 
         <div>
-            <asp:Label ID="Label2" CssClass="label-style" runat="server" Text="ENTER MODULE CODE"></asp:Label>
+            <label for="txtCode" class="label-style">ENTER MODULE CODE</label>
             <asp:TextBox ID="txtCode" CssClass="textbox-style" runat="server"></asp:TextBox>
             <asp:Button ID="btnSearch" CssClass="button-style" runat="server" Text="SEARCH" OnClick="btnSearch_Click" />
         </div>
 
         <div>
-            <asp:Label ID="Label3" CssClass="label-style" runat="server" Text="ENTER DATE (YYYY-MM-DD)"></asp:Label>
+            <label for="txtDate" class="label-style">ENTER DATE (YYYY-MM-DD)</label>
             <asp:TextBox ID="txtDate" CssClass="textbox-style" runat="server"></asp:TextBox>
         </div>
 
         <div>
-            <asp:Label ID="Label4" CssClass="label-style" runat="server" Text="ENTER STUDY HOURS OF THE DAY"></asp:Label>
+            <label for="txtHours" class="label-style">ENTER STUDY HOURS OF THE DAY</label>
             <asp:TextBox ID="txtHours" CssClass="textbox-style" runat="server"></asp:TextBox>
         </div>
 

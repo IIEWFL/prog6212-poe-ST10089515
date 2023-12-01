@@ -4,19 +4,37 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Semester Details</title>
     <style>
         body {
-            background-color: grey;
+            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
         .label-style {
             font-weight: bold;
-            color: black;
+            color: #333333;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .textbox-style {
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            width: 100%;
         }
 
         .button-style {
-            background-color: blue;
+            background-color: #3498db;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -26,32 +44,31 @@
             font-size: 16px;
             margin: 4px 2px;
             cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
 
-        .textbox-style {
-            padding: 5px;
-            margin: 5px;
+        .button-style:hover {
+            background-color: #2980b9;
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <asp:Label ID="Label1" CssClass="label-style" runat="server" Text="SEMESTER DETAILS"></asp:Label>
-        </div>
+        <h2 class="label-style">SEMESTER DETAILS</h2>
 
         <div>
-            <asp:Label ID="Label4" CssClass="label-style" runat="server" Text="NUMBER OF WEEKS"></asp:Label>
+            <label for="numberofWeeks" class="label-style">NUMBER OF WEEKS</label>
             <asp:TextBox ID="numberofWeeks" CssClass="textbox-style" runat="server"></asp:TextBox>
         </div>
 
         <div>
-            <asp:Label ID="Label2" CssClass="label-style" runat="server" Text="Start DATE"></asp:Label>
+            <label for="startDate" class="label-style">START DATE</label>
             <asp:TextBox ID="startDate" CssClass="textbox-style" runat="server"></asp:TextBox>
         </div>
 
         <div>
-            <asp:Label ID="Label3" CssClass="label-style" runat="server" Text="NUMBE OD MODULES"></asp:Label>
+            <label for="numberofModules" class="label-style">NUMBER OF MODULES</label>
             <asp:TextBox ID="numberofModules" CssClass="textbox-style" runat="server"></asp:TextBox>
         </div>
 

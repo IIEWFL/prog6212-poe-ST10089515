@@ -58,7 +58,8 @@ namespace WebModuleApp
                 string formattedResults = "Module Name | Self Study Hours per Week" + Environment.NewLine;
                 foreach (var result in results)
                 {
-                    formattedResults += $"{result.ModuleName} | {result.SelfStudyHoursPerWeek}" + Environment.NewLine;
+                    formattedResults += $"{result.ModuleName,-25} | {result.SelfStudyHoursPerWeek}" + Environment.NewLine;
+
                 }
 
                 lblDisplay.Text = formattedResults;

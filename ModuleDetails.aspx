@@ -4,19 +4,37 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Module Details</title>
     <style>
         body {
-            background-color: grey;
+            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
         .label-style {
             font-weight: bold;
-            color: black;
+            color: #333333;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .textbox-style {
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            width: 100%;
         }
 
         .button-style {
-            background-color: blue;
+            background-color: #3498db;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -26,31 +44,37 @@
             font-size: 16px;
             margin: 4px 2px;
             cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-style:hover {
+            background-color: #2980b9;
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:Label ID="Label1" runat="server" Text="MODULE DETAILS"></asp:Label>
+        <h2 class="label-style">MODULE DETAILS</h2>
 
         <div>
-            <asp:Label ID="Label2" CssClass="label-style" runat="server" Text="MODULE CODE  "></asp:Label>
-            <asp:TextBox ID="moduleCode" runat="server"></asp:TextBox>
+            <label for="moduleCode" class="label-style">MODULE CODE</label>
+            <asp:TextBox ID="moduleCode" CssClass="textbox-style" runat="server"></asp:TextBox>
         </div>
 
         <div>
-            <asp:Label ID="Label3" CssClass="label-style" runat="server" Text="MODULE NAME  "></asp:Label>
-            <asp:TextBox ID="moduleName" runat="server"></asp:TextBox>
+            <label for="moduleName" class="label-style">MODULE NAME</label>
+            <asp:TextBox ID="moduleName" CssClass="textbox-style" runat="server"></asp:TextBox>
         </div>
 
         <div>
-            <asp:Label ID="Label4" CssClass="label-style" runat="server" Text="MODULE CREDITS  "></asp:Label>
-            <asp:TextBox ID="moduleCredits" runat="server"></asp:TextBox>
+            <label for="moduleCredits" class="label-style">MODULE CREDITS</label>
+            <asp:TextBox ID="moduleCredits" CssClass="textbox-style" runat="server"></asp:TextBox>
         </div>
 
         <div>
-            <asp:Label ID="Label5" CssClass="label-style" runat="server" Text="MODULE HOURS  "></asp:Label>
-            <asp:TextBox ID="moduleHours" runat="server"></asp:TextBox>
+            <label for="moduleHours" class="label-style">MODULE HOURS</label>
+            <asp:TextBox ID="moduleHours" CssClass="textbox-style" runat="server"></asp:TextBox>
         </div>
 
         <div>

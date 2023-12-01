@@ -4,24 +4,37 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Registration Page</title>
     <style>
         body {
-            background-color: grey;
+            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
         .label-style {
             font-weight: bold;
-            color: black;
+            color: #333333;
+            display: block;
+            margin-bottom: 10px;
         }
 
         .textbox-style {
-            padding: 5px;
-            margin: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            width: 100%;
         }
 
         .button-style {
-            background-color: blue;
+            background-color: #3498db;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -31,41 +44,50 @@
             font-size: 16px;
             margin: 4px 2px;
             cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-style:hover {
+            background-color: #2980b9;
         }
 
         .password-style {
-            padding: 5px;
-            margin: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            width: 100%;
         }
 
         .message-style {
-            color: red;
+            color: #e74c3c;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <asp:Label ID="Label1" CssClass="label-style" runat="server" Text="RESGISTRATION PAGE"></asp:Label>
-        </div>
+        <h2 class="label-style">REGISTRATION PAGE</h2>
 
         <div>
-            <asp:Label ID="Label2" CssClass="label-style" runat="server" Text="FIRSTNAME"></asp:Label>
+            <label for="firstName" class="label-style">FIRSTNAME</label>
             <asp:TextBox ID="firstName" CssClass="textbox-style" runat="server"></asp:TextBox>
         </div>
 
         <div>
-            <asp:Label ID="Label3" CssClass="label-style" runat="server" Text="LASTNAME"></asp:Label>
+            <label for="lastName" class="label-style">LASTNAME</label>
             <asp:TextBox ID="lastName" CssClass="textbox-style" runat="server"></asp:TextBox>
         </div>
 
         <div>
-            <asp:Label ID="Label4" CssClass="label-style" runat="server" Text="USERNAME"></asp:Label>
+            <label for="userName" class="label-style">USERNAME</label>
             <asp:TextBox ID="userName" CssClass="textbox-style" runat="server"></asp:TextBox>
         </div>
 
         <div>
-            <asp:Label ID="Label5" CssClass="label-style" runat="server" Text="PASSWORD"></asp:Label>
+            <label for="password" class="label-style">PASSWORD</label>
             <input id="password" class="password-style" type="password" runat="server" />
         </div>
 
@@ -74,11 +96,11 @@
         </div>
 
         <div>
-            <asp:Label ID="lblMessage" CssClass="message-style" runat="server" Text="" ForeColor="Red"></asp:Label>
+            <asp:Label ID="lblMessage" CssClass="message-style" runat="server" Text="" ForeColor="Red"></asp:Label>             <asp:Button ID="btnLogin" CssClass="button-style" runat="server" Text="Login" OnClick="btnLogin_Click" />
         </div>
 
         <div>
-            <asp:Button ID="btnLogin" CssClass="button-style" runat="server" Text="Login" OnClick="btnLogin_Click" />
+
         </div>
     </form>
 </body>
