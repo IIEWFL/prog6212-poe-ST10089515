@@ -2,6 +2,8 @@
 
 WebModuleApp is a web application for managing modules, study hours, and related activities.
 
+# NB!! IF YOU WANT TO SEE THE CHART RUN THIS LINK https://localhost:44385/Modules/ShowGraphData
+
 ## Table of Contents
 
 - [Features](#features)
