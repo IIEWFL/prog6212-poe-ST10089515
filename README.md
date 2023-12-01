@@ -30,7 +30,7 @@ WebModuleApp is a web application for managing modules, study hours, and related
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/WebModuleApp.git
+    git clone https://github.com/st10089515/WebModuleApp.git
     ```
 
 2. Open the solution in Visual Studio.
