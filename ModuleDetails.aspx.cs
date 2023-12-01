@@ -46,15 +46,16 @@ namespace WebModuleApp
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-         
+
             SqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "INSERT INTO Modules (Code, Name, Credits, ClassHoursPerWeek) VALUES ('" + moduleCode.Text + "', '" + moduleName.Text + "', '" + moduleCredits.Text + "', '" + moduleHours.Text + "')";
+            cmd.CommandText = "INSERT INTO Modules (Code, Name, Credits, ClassHoursPerWeek) VALUES (@Code, @Name, @Credits, @ClassHoursPerWeek)";
 
-            cmd.Parameters.AddWithValue("@Code", moduleCode);
-            cmd.Parameters.AddWithValue("@Name", moduleName);
-            cmd.Parameters.AddWithValue("@Credits", moduleCredits);
-            cmd.Parameters.AddWithValue("@ClassHoursPerWeek", moduleHours);
+            cmd.Parameters.AddWithValue("@Code", moduleCode.Text);
+            cmd.Parameters.AddWithValue("@Name", moduleName.Text);
+            cmd.Parameters.AddWithValue("@Credits", moduleCredits.Text);
+            cmd.Parameters.AddWithValue("@ClassHoursPerWeek", moduleHours.Text);
+
 
             cmd.ExecuteNonQuery();
 
@@ -93,5 +94,11 @@ namespace WebModuleApp
 
 
         }
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("HomePage.aspx");
+            
+        }
+
     }
 }

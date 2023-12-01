@@ -32,7 +32,7 @@ namespace WebModuleApp
         {
             var dbContext = new ModuleAppDEMO2Entities();
             string username = txtUsername.Text;
-            string password = Request.Form["password"];
+            string password = txtPassword.Text;
 
             if (password != null)
             {
@@ -54,6 +54,8 @@ namespace WebModuleApp
                         // Clear the input fields.
                         txtUsername.Text = "";
                         // password.Value = "";
+
+                        Response.Redirect("HomePage.aspx");
                     }
                     else
                     {
@@ -88,5 +90,10 @@ namespace WebModuleApp
                 return sha256.ComputeHash(passwordBytes);
             }
         }
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Registration.aspx");
+        }
+
     }
 }

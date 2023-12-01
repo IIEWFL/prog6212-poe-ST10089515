@@ -26,5 +26,18 @@ namespace WebModuleApp.Controllers
 
             return View();
         }
+
+        public ActionResult ShowGraphData()
+        {
+            return View();
+
+        }
+
+        //public List<object> GetGraphData()
+        //{
+        //    List<object> data = new List<object>(); 
+        //    List<string> labels = _dbcontext.Order.Graphs.Select(g => g.ModuleId).Distinct().ToList();
+
+        //}
     }
 }

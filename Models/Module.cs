@@ -11,12 +11,15 @@ namespace WebModuleApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class Module
     {
+        private readonly ModuleAppDEMO2Entities _dbContext;
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Module()
         {
+           
             this.FilterUsers = new HashSet<FilterUser>();
             this.SemesterModules = new HashSet<SemesterModule>();
             this.Graphs = new HashSet<Graph>();
@@ -37,5 +40,23 @@ namespace WebModuleApp.Models
         public virtual ICollection<Graph> Graphs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HourCalculation> HourCalculations { get; set; }
+
+        public class ModuleService
+        {
+            private readonly ModuleAppDEMO2Entities _dbContext;
+
+            public ModuleService(ModuleAppDEMO2Entities dbContext)
+            {
+                _dbContext = dbContext;
+            }
+
+            public List<Module> GetAll()
+            {
+               return _dbContext.Modules.ToList();
+            }
+        }
+
+
+      
     }
 }

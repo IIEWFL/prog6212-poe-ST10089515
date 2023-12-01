@@ -81,5 +81,14 @@ namespace WebModuleApp
                 return sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
         }
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Login.aspx");
+        }
+
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Login.aspx");
+        }
     }
 }

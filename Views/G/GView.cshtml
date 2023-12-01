@@ -1,0 +1,28 @@
+﻿]<div id="chart_container">
+    <canvas id="bar_chart"></canvas>
+</div>
+
+<script>
+    var REP = @Html.Raw(Json.Encode(ViewBag.REP));
+    var hours = @Html.Raw(Json.Encode(ViewBag.HOURS));
+
+    var ctx = $("#bar_chart")[0].getContext('2d');
+    var barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: hours,
+            datasets: [{
+                label: "BAR CHART FOR MODULE HOURS",
+                data: REP,
+                backgroundColor: ["rgba(242,166,54)", "rgba(145,65,72)", "rgba(74,25,92)"],
+                borderColor: ["rgba(242,166,54)", "rgba(145,65,72)", "rgba(74,25,92)"],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: { xAxes: [{ ticks: { beginAtZero: true } }] },
+            legend: { display: false }
+        }
+    });
+</script>

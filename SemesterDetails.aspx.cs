@@ -50,23 +50,30 @@ namespace WebModuleApp
             {
                 // Only proceed if the parsing is successful
 
-                cmd.CommandText = "INSERT INTO Semesters (NumberofModules, Time, NumberofWeeks) VALUES (@NumberOfModules, @StartDate1, @NumberOfWeeks)";
+                cmd.CommandText = "INSERT INTO Semesters (NumberofModules, Time, NumberofWeeks) VALUES (@NumberOfModules, @StartDate, @NumberOfWeeks)";
 
                 cmd.Parameters.AddWithValue("@NumberOfModules", numberOfModules);
-                cmd.Parameters.AddWithValue("@StartDate", startDate1);
+                cmd.Parameters.AddWithValue("@StartDate", startDate1); // Corrected parameter name
                 cmd.Parameters.AddWithValue("@NumberOfWeeks", numberOfWeeks);
+
 
                 cmd.ExecuteNonQuery();
 
                 numberofWeeks.Text = "";
                 numberofModules.Text = "";
                 startDate.Text = "";
+
+                Response.Redirect("HomePage.aspx");
             }
             else
             {
                 // Handle the case where the DateTime parsing fails, e.g., show an error message.
                 // You might want to inform the user that the entered date is not in a valid format.
             }
+        }
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ModuleDetails.aspx");
         }
     }
 }

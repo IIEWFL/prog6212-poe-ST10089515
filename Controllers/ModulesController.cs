@@ -6,19 +6,93 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WebModuleApp.DataLayer;
 using WebModuleApp.Models;
+
+using static WebModuleApp.Models.Module;
+
 
 namespace WebModuleApp.Controllers
 {
     public class ModulesController : Controller
     {
         private ModuleAppDEMO2Entities db = new ModuleAppDEMO2Entities();
+        private readonly DbContextGraph _context;
 
         // GET: Modules
         public ActionResult Index()
         {
+            ShowGraphData(); // Moved this line here if it's intended
             return View(db.Modules.ToList());
+            // return View();
         }
+
+        Module module = null;
+        private readonly ModuleService _moduleService;
+
+        public ModulesController()
+        {
+            // Initialize any default values or resources here
+            _moduleService = new ModuleService(new ModuleAppDEMO2Entities()); // Initialize ModuleService (if necessary)
+        }
+        // Constructor with DbContextGraph parameter
+        public ModulesController(ModuleService moduleService) : this()
+        {
+            _moduleService = moduleService;
+        }
+
+        // Constructor with DbContextGraph parameter
+        public ModulesController(DbContextGraph context) : this()
+        {
+            _context = context;
+        }
+
+
+        // GET: GraphsA
+
+
+        public ActionResult ShowGraphData()
+        {
+            var list = _moduleService.GetAll();
+
+            List<int> repatitiions = new List<int>();
+
+            var name = list.Select(p => p.Name).Distinct();
+
+            var hour = list.Select(x => x.ClassHoursPerWeek).Distinct();
+            foreach (var item in hour) {
+
+                repatitiions.Add(list.Count(x => x.ClassHoursPerWeek == item));
+                repatitiions.Add(list.Count(p => name.Contains(p.Name)));
+
+
+
+
+            }
+            foreach (var item in name)
+            {
+                repatitiions.Add(list.Count(p => p.Name == item));
+            }
+
+            var rep = repatitiions;
+            ViewBag.NAME = name;
+            ViewBag.HOURS = hour;
+            ViewBag.REP = repatitiions.ToList();
+
+            return View();
+        }
+
+        [HttpPost]
+        public List<object> GetGraphsAData()
+        {
+            List<object> data = new List<object>();
+
+
+           
+
+            return data;
+        }
+
 
         // GET: Modules/Details/5
         public ActionResult Details(int? id)

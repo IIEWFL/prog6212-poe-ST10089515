@@ -81,6 +81,11 @@ namespace WebModuleApp
         {
 
         }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("HomePage.aspx");
+        }
     }
     }
 

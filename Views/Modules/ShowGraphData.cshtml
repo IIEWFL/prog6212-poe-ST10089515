@@ -1,0 +1,74 @@
+﻿<html>
+
+<head>
+    <script src="~/Scripts/chart.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        #chart_container {
+            width: 1000px;
+            height: 1000px;
+            border: 1px solid #ddd;
+            padding: 1px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chart_container">
+        <canvas id="barChart"></canvas>
+    </div>
+
+    <script>
+        var REP = @Html.Raw(Json.Encode(ViewBag.REP));
+        var hours = @Html.Raw(Json.Encode(ViewBag.HOURS));
+        var name = @Html.Raw(Json.Encode(ViewBag.NAME));
+
+        var ctx = $("#barChart");
+        var barChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: name,
+                datasets: [{
+                    label: "BAR CHART FOR MODULE HOURS",
+                    data: hours,
+                    backgroundColor: ["rgba(242,166,54)", "rgba(145,65,.5)", "(74,25,.5)"],
+                    borderColor: ["rgba(242,166,54)", "rgba(145,65,72)", "rgba(74,25,92)"],
+                    borderWidth: 2 // Adjust the border width
+                }]
+            },
+             
+         
+            
+
+
+
+
+
+            options: {
+                layout: {
+                    padding: {
+                        left: 50,
+                        right: 50,
+                        top: 50,
+                        bottom: 50
+                    }
+                },
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        ticks: { beginAtZero: true, maxRotation: 90, minRotation: 80 }, // Adjust rotation here
+                        categoryPercentage: 0.8, // Adjust the spacing between bars
+                        barPercentage: 0.9 // Adjust the width of the bars
+                    }],
+                    yAxes: [{ ticks: { beginAtZero: true } }]
+                },
+                legend: { display: false },
+            },
+        });
+    </script>
+</body>
+
+</html>

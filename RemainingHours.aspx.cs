@@ -107,6 +107,11 @@ namespace WebModuleApp
                     lblDisplay.Text = $"Module with code {searchCode} not found.";
                 }
             }
+
+        }
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("HomePage.aspx");
         }
     }
 }

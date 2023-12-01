@@ -56,6 +56,11 @@ namespace WebModuleApp
 
                 // Save changes to the database
                 dbContext.SaveChanges();
+
+                lblMessage.Text = "SAVED";
+                lblMessage.ForeColor = System.Drawing.Color.Green;
+                Response.Redirect("HomePage.aspx");
+
             }
         }
 
@@ -97,6 +102,11 @@ namespace WebModuleApp
 
 
             }
+
+        }
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("HomePage.aspx");
         }
     }
 }

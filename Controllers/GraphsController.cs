@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using WebModuleApp.Models;
@@ -12,6 +13,16 @@ namespace WebModuleApp.Controllers
 {
     public class GraphsController : Controller
     {
+
+        private readonly ModuleAppDEMO2Entities _context;
+
+
+
+        public GraphsController(ModuleAppDEMO2Entities context) { 
+        
+        _context = context; 
+        
+        }
         private ModuleAppDEMO2Entities db = new ModuleAppDEMO2Entities();
 
         // GET: Graphs
@@ -33,14 +44,27 @@ namespace WebModuleApp.Controllers
 
             return View(graphData);
         }
-
-        private List<Graph> GetGraphData()
+        [HttpPost]
+        public JsonResult GetGraphData()
         {
-            // Implement the logic to retrieve and format the data for the graph
-            // This will depend on your specific data model and requirements
-            // For example, you might query the database and format the data accordingly
-            // Return a list of view models with the necessary data for the graph
-            return new List<Graph>();
+            List<Graph> data = new List<Graph>();
+
+            List<int?> moduleIds = _context.Graphs.Select(g => g.ModuleId).Distinct().ToList();
+
+            foreach (var moduleId in moduleIds)
+            {
+                // Assuming you want data for each module
+                var moduleData = _context.Graphs
+                    .Where(g => g.ModuleId == moduleId)
+                    .OrderBy(g => g.Date) // Assuming you want to order by date
+                    .ToList();
+
+                // Add the moduleData to your result
+                data.AddRange(moduleData);
+            }
+
+            // Return the data as JSON or in any other suitable format
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Details(int? id)
