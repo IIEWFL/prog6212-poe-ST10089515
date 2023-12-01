@@ -51,13 +51,7 @@ namespace WebModuleApp
         protected void btnGraph_Click(object sender, EventArgs e)
         {
 
-           // var modulesData = GetGraphData();
-
-            // Serialize the data to JSON
-           // var jsonModulesData = new JavaScriptSerializer().Serialize(modulesData);
-
-            // Execute a JavaScript function to update the graph
-//            ClientScript.RegisterStartupScript(this.GetType(), "UpdateGraph", $"updateGraph({jsonModulesData});", true);
+        
 
 
         }
@@ -66,5 +60,7 @@ namespace WebModuleApp
         {
             Response.Redirect("~/Login.aspx");
         }
+
+
     }
 }

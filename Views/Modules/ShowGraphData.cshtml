@@ -1,38 +1,69 @@
-﻿@{
-    ViewBag.Title = "ShowGraphData";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿< Page Language="C#" AutoEventWireup="true" CodeBehind="HomePage.aspx.cs" Inherits="WebModuleApp.HomePage" %>
 
-<div>
-    <canvas id="myChart"></canvas>
-</div>
+<!DOCTYPE html>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-    // Retrieve the chart data from the ViewBag
-    var chartData = @Html.Raw(ViewBag.ChartData);
-
-    const ctx = document.getElementById('myChart');
-
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: chartData.map(item => item.ModuleName),
-            datasets: [{
-                label: 'Class Hours Per Week',
-                data: chartData.map(item => item.ClassHoursPerWeek),
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <h1>Welcome to the Home Page</h1>
+            <div>
+                <canvas id="myChart"></canvas>
+            </div>
+            <script>
+                // JavaScript code to call the server-side method and retrieve chart data
+                function getChartData() {
+                    // Use AJAX to call the server-side method
+                    $.ajax({
+                        type: "POST",
+                        url: "HomePage.aspx/GetChartData",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            // Parse the JSON response and set up the chart
+                            var chartData = JSON.parse(response.d);
+                            setupChart(chartData);
+                        },
+                        error: function (error) {
+                            console.log("Error:", error);
+                        }
+                    });
                 }
-            }
-        }
-    });
-</script>
+
+                // JavaScript code to set up the chart
+                function setupChart(chartData) {
+                    const ctx = document.getElementById('myChart');
+
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: chartData.map(item => item.ModuleName),
+                            datasets: [{
+                                label: 'Class Hours Per Week',
+                                data: chartData.map(item => item.ClassHoursPerWeek),
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // Call the getChartData function when the page is loaded
+                window.onload = getChartData;
+            </script>
+        </div>
+    </form>
+</body>
+</html>
