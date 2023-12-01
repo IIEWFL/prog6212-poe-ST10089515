@@ -15,7 +15,7 @@ namespace WebModuleApp
 {
     public partial class DisplayModule : System.Web.UI.Page
     {
-        
+
 
 
 
@@ -64,7 +64,7 @@ namespace WebModuleApp
 
                 lblDisplay.Text = formattedResults;
 
-               
+
             }
 
 
@@ -74,14 +74,14 @@ namespace WebModuleApp
         {
             using (ModuleAppDEMO2Entities context = new ModuleAppDEMO2Entities())
             {
-               
+
             }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
-        {
+        { 
 
-        }
+            }
 
         protected void btnBack_Click(object sender, EventArgs e)
         {

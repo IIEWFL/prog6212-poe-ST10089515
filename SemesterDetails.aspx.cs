@@ -12,25 +12,16 @@ using System.Web.UI.WebControls;
 namespace WebModuleApp
 {
     public partial class SemesterDetails : System.Web.UI.Page
-
-
     {
         SqlConnection con = new SqlConnection(@"Data Source=NAITH;Initial Catalog=ModuleAppDEMO2;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (con.State == ConnectionState.Open)
             {
-
-
                 con.Close();
             }
             con.Open();
-
-        
-
         }
 
         protected void save_Click(object sender, EventArgs e)
@@ -56,21 +47,28 @@ namespace WebModuleApp
                 cmd.Parameters.AddWithValue("@StartDate", startDate1); // Corrected parameter name
                 cmd.Parameters.AddWithValue("@NumberOfWeeks", numberOfWeeks);
 
-
                 cmd.ExecuteNonQuery();
 
                 numberofWeeks.Text = "";
                 numberofModules.Text = "";
                 startDate.Text = "";
 
-                Response.Redirect("HomePage.aspx");
+                // Display a success message
+                lblMessage.Text = "Semester details saved successfully.";
+                lblMessage.ForeColor = Color.Green;
             }
             else
             {
                 // Handle the case where the DateTime parsing fails, e.g., show an error message.
                 // You might want to inform the user that the entered date is not in a valid format.
+                lblMessage.Text = "Please enter a valid date in the format YYYY-MM-DD.";
+                lblMessage.ForeColor = Color.Red;
+                numberofWeeks.Text = "";
+                numberofModules.Text = "";
+                startDate.Text = "";
             }
         }
+
         protected void btnBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("ModuleDetails.aspx");

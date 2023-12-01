@@ -47,35 +47,43 @@ namespace WebModuleApp
         protected void Button1_Click(object sender, EventArgs e)
         {
 
-            SqlCommand cmd = con.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "INSERT INTO Modules (Code, Name, Credits, ClassHoursPerWeek) VALUES (@Code, @Name, @Credits, @ClassHoursPerWeek)";
-
-            cmd.Parameters.AddWithValue("@Code", moduleCode.Text);
-            cmd.Parameters.AddWithValue("@Name", moduleName.Text);
-            cmd.Parameters.AddWithValue("@Credits", moduleCredits.Text);
-            cmd.Parameters.AddWithValue("@ClassHoursPerWeek", moduleHours.Text);
-
-
-            cmd.ExecuteNonQuery();
-
-
+            if (string.IsNullOrWhiteSpace(moduleCode.Text) ||
+      string.IsNullOrWhiteSpace(moduleName.Text) ||
+      string.IsNullOrWhiteSpace(moduleCredits.Text) ||
+      string.IsNullOrWhiteSpace(moduleHours.Text))
+            {
+                // Display a message indicating that all fields must be filled
+                lblMessage.Text = "Please enter valid values for all fields.";
+                moduleCode.Text = "";
+                moduleName.Text = "";
+                moduleCredits.Text = "";
+                moduleHours.Text = "";
 
 
+            }
+            else
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "INSERT INTO Modules (Code, Name, Credits, ClassHoursPerWeek) VALUES (@Code, @Name, @Credits, @ClassHoursPerWeek)";
 
-            moduleCode.Text = "";
-            moduleName.Text = "";
-            moduleCredits.Text = "";
-            moduleHours.Text = "";
+                cmd.Parameters.AddWithValue("@Code", moduleCode.Text);
+                cmd.Parameters.AddWithValue("@Name", moduleName.Text);
+                cmd.Parameters.AddWithValue("@Credits", moduleCredits.Text);
+                cmd.Parameters.AddWithValue("@ClassHoursPerWeek", moduleHours.Text);
 
+                cmd.ExecuteNonQuery();
 
+                moduleCode.Text = "";
+                moduleName.Text = "";
+                moduleCredits.Text = "";
+                moduleHours.Text = "";
 
-            display();
+                display();
 
-
-            // Assuming you are in a code-behind file of a web form
-            Response.Redirect("SemesterDetails.aspx");
-
+                // Redirect to SemesterDetails.aspx after successful insertion
+                Response.Redirect("SemesterDetails.aspx");
+            }
 
 
 

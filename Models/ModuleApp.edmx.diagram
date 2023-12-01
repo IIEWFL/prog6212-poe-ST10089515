@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b01ca332dd744f4793e6fc0901a07cea" Name="Diagram1">
+      <Diagram DiagramId="b01ca332dd744f4793e6fc0901a07cea" Name="Diagram1" ZoomLevel="71">
         <EntityTypeShape EntityType="ModuleAppDEMO2Model.FilterUser" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ModuleAppDEMO2Model.Module" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ModuleAppDEMO2Model.SemesterModule" Width="1.5" PointX="6" PointY="2.875" IsExpanded="true" />

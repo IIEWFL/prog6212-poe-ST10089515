@@ -15,17 +15,19 @@ namespace WebModuleApp.Models
 
     public partial class Module
     {
-        private readonly ModuleAppDEMO2Entities _dbContext;
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Module()
         {
-           
             this.FilterUsers = new HashSet<FilterUser>();
             this.SemesterModules = new HashSet<SemesterModule>();
             this.Graphs = new HashSet<Graph>();
             this.HourCalculations = new HashSet<HourCalculation>();
+
+            ModuleAppDEMO2Entities _dbcontext = new ModuleAppDEMO2Entities();   
         }
-    
+        ModuleAppDEMO2Entities _dbcontext = new ModuleAppDEMO2Entities();
+
+
         public int ModuleId { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
@@ -41,22 +43,10 @@ namespace WebModuleApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HourCalculation> HourCalculations { get; set; }
 
-        public class ModuleService
+        public List<Module> GetAllModules()
         {
-            private readonly ModuleAppDEMO2Entities _dbContext;
-
-            public ModuleService(ModuleAppDEMO2Entities dbContext)
-            {
-                _dbContext = dbContext;
-            }
-
-            public List<Module> GetAll()
-            {
-               return _dbContext.Modules.ToList();
-            }
+            // Retrieve all modules from the database
+            return _dbcontext.Modules.ToList();
         }
-
-
-      
     }
 }

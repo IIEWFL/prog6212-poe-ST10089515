@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using WebModuleApp.DataLayer;
 using WebModuleApp.Models;
 
+
+
 using static WebModuleApp.Models.Module;
 
 
@@ -27,19 +29,24 @@ namespace WebModuleApp.Controllers
             // return View();
         }
 
-        Module module = null;
-        private readonly ModuleService _moduleService;
+        public Module Module;
+        //Module module = null;
+       // private readonly ModuleService _moduleService;
 
         public ModulesController()
         {
+
+            Module module = new Module();
+                
             // Initialize any default values or resources here
-            _moduleService = new ModuleService(new ModuleAppDEMO2Entities()); // Initialize ModuleService (if necessary)
+           // _moduleService = new ModuleService(new ModuleAppDEMO2Entities()); // Initialize ModuleService (if necessary)
+            //_moduleService = new ModuleService(new ModuleAppDEMO2Entities()); // Initialize ModuleService (if necessary)
         }
         // Constructor with DbContextGraph parameter
-        public ModulesController(ModuleService moduleService) : this()
-        {
-            _moduleService = moduleService;
-        }
+        //public ModulesController(ModuleService moduleService) : this()
+        //{
+        //   // _moduleService = moduleService;
+        //}
 
         // Constructor with DbContextGraph parameter
         public ModulesController(DbContextGraph context) : this()
@@ -53,7 +60,7 @@ namespace WebModuleApp.Controllers
 
         public ActionResult ShowGraphData()
         {
-            var list = _moduleService.GetAll();
+            var list = Module.GetAllModules();
 
             List<int> repatitiions = new List<int>();
 

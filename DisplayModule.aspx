@@ -78,9 +78,9 @@
         </div>
 
         <div>
-            <label for="txtSearch">SEARCH MODULE</label>
-            <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control"></asp:TextBox>
-            <asp:Button ID="btnSearch" runat="server" Text="SEARCH" OnClick="btnSearch_Click" CssClass="btn btn-primary" />
+            <label for="txtSearch"></label>
+            
+            
         </div>
 
         <div>

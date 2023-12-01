@@ -79,6 +79,9 @@
         <div>
             <asp:Button ID="btnBack" CssClass="button-style" runat="server" Text="BACK" OnClick="btnBack_Click" />
         </div>
+        <div>
+    <asp:Label ID="lblMessage" CssClass="message-style" runat="server" Text="" ForeColor="Red"></asp:Label>
+</div>
     </form>
 </body>
 </html>
