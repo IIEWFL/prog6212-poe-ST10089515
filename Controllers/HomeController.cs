@@ -27,11 +27,17 @@ namespace WebModuleApp.Controllers
             return View();
         }
 
+        public ActionResult Login()
+        {
+            return View("ViewLogin");
+        }
+
         public ActionResult ShowGraphData()
         {
             return View();
 
         }
+
 
         //public List<object> GetGraphData()
         //{

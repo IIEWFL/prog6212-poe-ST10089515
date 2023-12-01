@@ -14,14 +14,18 @@ namespace WebModuleApp
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-           
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            // Add this route to map /Home/Login to the Login.aspx page
+            routes.MapPageRoute("LoginRoute", "Home/Login", "~/Login.aspx");
+
 
 
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Users", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
