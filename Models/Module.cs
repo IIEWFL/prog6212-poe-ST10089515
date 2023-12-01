@@ -12,6 +12,7 @@ namespace WebModuleApp.Models
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Web;
 
     public partial class Module
     {
@@ -23,7 +24,7 @@ namespace WebModuleApp.Models
             this.Graphs = new HashSet<Graph>();
             this.HourCalculations = new HashSet<HourCalculation>();
 
-            ModuleAppDEMO2Entities _dbcontext = new ModuleAppDEMO2Entities();   
+            ModuleAppDEMO2Entities _dbcontext = new ModuleAppDEMO2Entities();
         }
         ModuleAppDEMO2Entities _dbcontext = new ModuleAppDEMO2Entities();
 
@@ -33,7 +34,7 @@ namespace WebModuleApp.Models
         public string Name { get; set; }
         public Nullable<int> Credits { get; set; }
         public Nullable<int> ClassHoursPerWeek { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FilterUser> FilterUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -43,10 +44,111 @@ namespace WebModuleApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HourCalculation> HourCalculations { get; set; }
 
-        public List<Module> GetAllModules()
+
+        public List<Module> GetAllData()
         {
-            // Retrieve all modules from the database
-            return _dbcontext.Modules.ToList();
+            using (ModuleAppDEMO2Entities dbContext = new ModuleAppDEMO2Entities())
+            {
+                // Retrieve all data from the Module table
+                List<Module> allData = dbContext.Modules.ToList();
+
+                // Include related entities if needed
+                // dbContext.Entry(this).Collection(m => m.FilterUsers).Load();
+                // dbContext.Entry(this).Collection(m => m.SemesterModules).Load();
+                // dbContext.Entry(this).Collection(m => m.Graphs).Load();
+                // dbContext.Entry(this).Collection(m => m.HourCalculations).Load();
+
+                return allData;
+            }
+        }
+            public List<Module> GetAllModules()
+            {
+                // Retrieve all modules from the database
+                return _dbcontext.Modules.ToList();
+            }
+
+            public void ShowGraphData()
+            {
+                // Retrieve data for the chart
+                using (ModuleAppDEMO2Entities dbContext = new ModuleAppDEMO2Entities())
+                {
+                    var data = dbContext.Modules
+                        .Select(m => new { m.Name, m.ClassHoursPerWeek })
+                        .ToList();
+
+                    // Prepare data for the chart
+                    var moduleNames = data.Select(d => d.Name).ToArray();
+                    var classHoursPerWeek = data.Select(d => d.ClassHoursPerWeek ?? 0).ToArray();
+
+                    // Create a JavaScript function to render the chart
+                    var script = $@"
+                    <script>
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var myChart = new Chart(ctx, {{
+                            type: 'bar',
+                            data: {{
+                                labels: {Newtonsoft.Json.JsonConvert.SerializeObject(moduleNames)},
+                                datasets: [{{
+                                    label: 'Class Hours Per Week',
+                                    data: {Newtonsoft.Json.JsonConvert.SerializeObject(classHoursPerWeek)},
+                                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                    borderWidth: 1
+                                }}]
+                            }},
+                            options: {{
+                                scales: {{
+                                    y: {{
+                                        beginAtZero: true
+                                    }}
+                                }}
+                            }}
+                        }});
+                    </script>
+                ";
+
+                    // Render the chart on the web page
+                    HttpContext.Current.Response.Write(script);
+                }
+            }
+
+            public string GetChartScript()
+            {
+                // Retrieve data for the chart
+                var list = GetAllModules();
+
+                // Prepare data for the chart
+                var names = list.Select(p => p.Name).Distinct().ToArray();
+                var classHours = list.Select(p => p.ClassHoursPerWeek ?? 0).ToArray();
+
+                // Generate the chart script
+                return $@"
+                <script>
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var myChart = new Chart(ctx, {{
+                        type: 'bar',
+                        data: {{
+                            labels: {Newtonsoft.Json.JsonConvert.SerializeObject(names)},
+                            datasets: [{{
+                                label: 'Class Hours Per Week',
+                                data: {Newtonsoft.Json.JsonConvert.SerializeObject(classHours)},
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }}]
+                        }},
+                        options: {{
+                            scales: {{
+                                y: {{
+                                    beginAtZero: true
+                                }}
+                            }}
+                        }}
+                    }});
+                </script>";
+            }
         }
     }
-}
+
+        
+

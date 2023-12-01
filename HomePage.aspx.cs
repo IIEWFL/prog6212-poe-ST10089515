@@ -6,6 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Security.Cryptography.X509Certificates;
+using WebModuleApp.Controllers;
+using System.Web.Script.Serialization;
 
 namespace WebModuleApp
 {
@@ -47,10 +50,18 @@ namespace WebModuleApp
 
         protected void btnGraph_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Graph.aspx");
+
+           // var modulesData = GetGraphData();
+
+            // Serialize the data to JSON
+           // var jsonModulesData = new JavaScriptSerializer().Serialize(modulesData);
+
+            // Execute a JavaScript function to update the graph
+//            ClientScript.RegisterStartupScript(this.GetType(), "UpdateGraph", $"updateGraph({jsonModulesData});", true);
+
 
         }
-
+       
         protected void btnExit_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Login.aspx");

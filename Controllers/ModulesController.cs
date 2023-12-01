@@ -20,10 +20,15 @@ namespace WebModuleApp.Controllers
     {
         private ModuleAppDEMO2Entities db = new ModuleAppDEMO2Entities();
         private readonly DbContextGraph _context;
+        private Module _moduleInstance;
+        // private readonly ModuleService _moduleService;
+
 
         // GET: Modules
         public ActionResult Index()
         {
+            Module module = new Module();
+            ViewBag.ChartScript = module.GetChartScript();
             ShowGraphData(); // Moved this line here if it's intended
             return View(db.Modules.ToList());
             // return View();
@@ -36,10 +41,11 @@ namespace WebModuleApp.Controllers
         public ModulesController()
         {
 
-            Module module = new Module();
-                
+
+            Module = new Module();
+
             // Initialize any default values or resources here
-           // _moduleService = new ModuleService(new ModuleAppDEMO2Entities()); // Initialize ModuleService (if necessary)
+            // _moduleService = new ModuleService(new ModuleAppDEMO2Entities()); // Initialize ModuleService (if necessary)
             //_moduleService = new ModuleService(new ModuleAppDEMO2Entities()); // Initialize ModuleService (if necessary)
         }
         // Constructor with DbContextGraph parameter
@@ -62,29 +68,20 @@ namespace WebModuleApp.Controllers
         {
             var list = Module.GetAllModules();
 
-            List<int> repatitiions = new List<int>();
+            // Prepare data for the chart
+            var chartData = list
+                .GroupBy(m => m.Name)
+                .Select(group => new
+                {
+                    ModuleName = group.Key,
+                    ClassHoursPerWeek = group.Sum(m => m.ClassHoursPerWeek ?? 0)
+                })
+                .OrderByDescending(data => data.ClassHoursPerWeek)
+                .ToList();
 
-            var name = list.Select(p => p.Name).Distinct();
+            // Convert the data to JSON format
+            ViewBag.ChartData = Newtonsoft.Json.JsonConvert.SerializeObject(chartData);
 
-            var hour = list.Select(x => x.ClassHoursPerWeek).Distinct();
-            foreach (var item in hour) {
-
-                repatitiions.Add(list.Count(x => x.ClassHoursPerWeek == item));
-                repatitiions.Add(list.Count(p => name.Contains(p.Name)));
-
-
-
-
-            }
-            foreach (var item in name)
-            {
-                repatitiions.Add(list.Count(p => p.Name == item));
-            }
-
-            var rep = repatitiions;
-            ViewBag.NAME = name;
-            ViewBag.HOURS = hour;
-            ViewBag.REP = repatitiions.ToList();
 
             return View();
         }
